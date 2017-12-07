@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    working_directory: /go/src/github.com/vivareal/ligeiro
+    docker:
+      - image: circleci/golang:1.9.2
+    steps:
+      - checkout
+      - run:
+          name: Download dependencies
+          command: go get github.com/sirupsen/logrus
+      - run:
+          name: Run specs with coverage and race condition check
+          command: go test -v -cover -race ./...
