@@ -3,7 +3,9 @@ package envcfg
 
 import (
 	"fmt"
+	"log"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -26,9 +28,19 @@ func (c *config) Get(key string) string {
 	if configValue, exists := c.parsedConfigs[key]; exists {
 		return configValue
 	} else {
-		fmt.Sprintf("Unexpected config, returning empty string: %v", key)
+		fmt.Println(fmt.Sprintf("Unexpected config, returning empty string: %v", key))
 		return ""
 	}
+}
+
+func (c *config) GetInt(key string) int {
+	value, err := strconv.ParseInt(c.Get(key), 10, 64)
+
+	if err != nil {
+		log.Fatalf("Key value cannot be casted to int: %v", key)
+	}
+
+	return int(value)
 }
 
 // Bundled configs (ENVIRONMENT, LOG_LEVEL and VERSION) only, useful for brand new applications that has no extra confs.

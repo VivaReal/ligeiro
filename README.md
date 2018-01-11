@@ -28,11 +28,13 @@ func main() {
 	Config := envcfg.Load(envcfg.EnvCfgMap{
 		"APPLICATION": "myappname",
 		"LISTEN_PORT": ":8080",
+		"MAX_BYTES": "3000000"
 	})
 
 	fmt.Println(Config.Get("listenPort"))
 	fmt.Println(Config.Get("application"))
 	fmt.Println(Config.Get("logLevel"))
+	fmt.Println(Config.GetInt("maxBytes"), fmt.Sprintf("%T", Config.GetInt("maxBytes")))
 }
 ```
 
@@ -44,6 +46,7 @@ $ LOG_LEVEL=error go run main.go
 :8080
 myappname
 error
+3000000 int
 ```
 
 ### Logs

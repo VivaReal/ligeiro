@@ -68,3 +68,14 @@ func TestCustomConfigs(t *testing.T) {
 		t.Errorf("==> Bundled config default took precedence over custom ones: '%v'", config.Get("logLevel"))
 	}
 }
+
+func TestGetInt(t *testing.T) {
+	t.Log("Returns casted int from config")
+
+	config := Load(Map{"MY_ENV_VAR": "30000"})
+
+	if config.GetInt("myEnvVar") != 30000 {
+		t.Errorf("==> GetInt config didn't casted value: %v", config.Get("myEnvVar"))
+	}
+	os.Unsetenv("MY_ENV_VAR") // Teardown
+}
