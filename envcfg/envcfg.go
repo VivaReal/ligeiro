@@ -33,14 +33,32 @@ func (c *config) Get(key string) string {
 	}
 }
 
-func (c *config) GetInt(key string) int {
+func (c *config) GetInt64(key string) int64 {
 	value, err := strconv.ParseInt(c.Get(key), 10, 64)
 
 	if err != nil {
 		log.Fatalf("Key value cannot be casted to int: %v", key)
 	}
 
-	return int(value)
+	return value
+}
+
+func (c *config) GetInt(key string) int {
+	return int(c.GetInt64(key))
+}
+
+func (c *config) GetFloat64(key string) float64 {
+	value, err := strconv.ParseFloat(c.Get(key), 64)
+
+	if err != nil {
+		log.Fatalf("Key value cannot be casted to float: %v", key)
+	}
+
+	return value
+}
+
+func (c *config) GetFloat(key string) float32 {
+	return float32(c.GetFloat64(key))
 }
 
 // Bundled configs (ENVIRONMENT, LOG_LEVEL and VERSION) only, useful for brand new applications that has no extra confs.
