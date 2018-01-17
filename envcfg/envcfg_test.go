@@ -79,3 +79,36 @@ func TestGetInt(t *testing.T) {
 	}
 	os.Unsetenv("MY_ENV_VAR") // Teardown
 }
+
+func TestGetFloat(t *testing.T) {
+	t.Log("Returns casted float from config")
+
+	config := Load(Map{"MY_ENV_VAR": "30.5"})
+
+	if config.GetFloat("myEnvVar") != float32(30.5) {
+		t.Errorf("==> GetInt config didn't casted value: %v", config.Get("myEnvVar"))
+	}
+	os.Unsetenv("MY_ENV_VAR") // Teardown
+}
+
+func TestGetInt64(t *testing.T) {
+	t.Log("Returns casted int from config")
+
+	config := Load(Map{"MY_ENV_VAR": "30000"})
+
+	if config.GetInt64("myEnvVar") != int64(30000) {
+		t.Errorf("==> GetInt config didn't casted value: %v", config.Get("myEnvVar"))
+	}
+	os.Unsetenv("MY_ENV_VAR") // Teardown
+}
+
+func TestGetFloat64(t *testing.T) {
+	t.Log("Returns casted float from config")
+
+	config := Load(Map{"MY_ENV_VAR": "30.5"})
+
+	if config.GetFloat64("myEnvVar") != float64(30.5) {
+		t.Errorf("==> GetInt config didn't casted value: %v", config.Get("myEnvVar"))
+	}
+	os.Unsetenv("MY_ENV_VAR") // Teardown
+}
