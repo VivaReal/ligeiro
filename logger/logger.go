@@ -15,7 +15,7 @@ import (
 	"time"
 
 	"github.com/sirupsen/logrus"
-	"github.com/vivareal/ligeiro/envcfg"
+	"github.com/grupozap/ligeiro/envcfg"
 )
 
 var config = envcfg.LoadBundled()
