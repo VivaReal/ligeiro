@@ -21,7 +21,7 @@ configs (ENVIRONMENT, LOG_LEVEL and VERSION):
 import (
 	"fmt"
 
-	"github.com/vivareal/ligeiro/envcfg"
+	"github.com/grupozap/ligeiro/envcfg"
 )
 
 func main() {
@@ -57,7 +57,7 @@ best way to use it to define your own `applog` package with custom fields regist
 ```go
 package myapi
 
-import "github.com/vivareal/ligeiro/logger"
+import "github.com/grupozap/ligeiro/logger"
 
 var Applog = logger.WithFields(logger.Fields{
 	"application": "myapi",

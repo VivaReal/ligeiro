@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/sirupsen/logrus"
-	"github.com/vivareal/ligeiro/logger"
+	"github.com/grupozap/ligeiro/logger"
 )
 
 func ExampleInfo() {

@@ -3,7 +3,7 @@ package envcfg_test
 import (
 	"fmt"
 
-	"github.com/vivareal/ligeiro/envcfg"
+	"github.com/grupozap/ligeiro/envcfg"
 )
 
 func ExampleLoad() {
