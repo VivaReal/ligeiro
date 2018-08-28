@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/sirupsen/logrus"
 	"github.com/grupozap/ligeiro/logger"
+	"github.com/sirupsen/logrus"
 )
 
 func ExampleInfo() {
@@ -18,9 +18,9 @@ func ExampleInfo() {
 
 	json.Unmarshal(buffer.Bytes(), &fields)
 
-	fmt.Println(fields["full_message"])
-	fmt.Println(fields["environment"])
-	fmt.Println(fields["version"])
+	fmt.Println(fields["short_message"])
+	fmt.Println(fields["_environment"])
+	fmt.Println(fields["_app_version"])
 	// Output:
 	// Lorem Ipsum
 	// dev
@@ -37,10 +37,10 @@ func ExampleInfof() {
 
 	json.Unmarshal(buffer.Bytes(), &fields)
 
-	fmt.Println(fields["full_message"])
-	fmt.Println(fields["environment"])
-	fmt.Println(fields["version"])
-	fmt.Println(fields["custom"])
+	fmt.Println(fields["short_message"])
+	fmt.Println(fields["_environment"])
+	fmt.Println(fields["_app_version"])
+	fmt.Println(fields["_custom"])
 	// Output:
 	// Lorem Ipsum
 	// dev
