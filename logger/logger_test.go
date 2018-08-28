@@ -8,6 +8,27 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+func TestRequiredFieldByGELPSpec(t *testing.T) {
+	t.Log("Comply with GELF 1.1 spec")
+
+	var fields logrus.Fields
+	var buffer bytes.Buffer
+	logrus.SetOutput(&buffer)
+
+	Info("Lorem Ipsum")
+	json.Unmarshal(buffer.Bytes(), &fields)
+
+	if _, exists := fields["full_message"]; !exists {
+		t.Error("GELF spec requires `full_message` field to be defined even it's blank")
+	}
+	if fields["version"] != "1.1" {
+		t.Errorf("Current implemented GELF spec version is 1.1, got: %s", fields["version"])
+	}
+	if _, exists := fields["_version"]; exists {
+		t.Error("Field version can't be set as custom")
+	}
+}
+
 func TestLoggerLevel(t *testing.T) {
 	t.Log("Log with respective level (DEBUG, INFO, WARN, ERROR, FATAL, PANIC)")
 
@@ -60,7 +81,7 @@ func TestLoggerCustomFields(t *testing.T) {
 	customFields.Debug("Lorem Ipsum")
 
 	json.Unmarshal(buffer.Bytes(), &fields)
-	if fields["application"] != "myapp" {
+	if fields["_application"] != "myapp" {
 		t.Errorf("Custom field not logged")
 	}
 
@@ -69,7 +90,7 @@ func TestLoggerCustomFields(t *testing.T) {
 	customFields.Info("Lorem Ipsum")
 
 	json.Unmarshal(buffer.Bytes(), &fields)
-	if fields["application"] != "myapp" {
+	if fields["_application"] != "myapp" {
 		t.Errorf("Custom field not logged")
 	}
 
@@ -78,7 +99,7 @@ func TestLoggerCustomFields(t *testing.T) {
 	customFields.Warn("Lorem Ipsum")
 
 	json.Unmarshal(buffer.Bytes(), &fields)
-	if fields["application"] != "myapp" {
+	if fields["_application"] != "myapp" {
 		t.Errorf("Custom field not logged")
 	}
 
@@ -87,7 +108,7 @@ func TestLoggerCustomFields(t *testing.T) {
 	customFields.Error("Lorem Ipsum")
 
 	json.Unmarshal(buffer.Bytes(), &fields)
-	if fields["application"] != "myapp" {
+	if fields["_application"] != "myapp" {
 		t.Errorf("Custom field not logged")
 	}
 }
