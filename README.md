@@ -25,7 +25,7 @@ import (
 )
 
 func main() {
-	Config := envcfg.Load(envcfg.EnvCfgMap{
+	Config := envcfg.Load(envcfg.Map{
 		"APPLICATION": "myappname",
 		"LISTEN_PORT": ":8080",
 		"MAX_BYTES": "3000000"
