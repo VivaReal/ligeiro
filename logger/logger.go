@@ -40,7 +40,11 @@ type Fields logrus.Fields
 type jsonFormatter struct{}
 
 func init() {
-	logrus.SetLevel(levelFromString(config.Get("logLevel")))
+	logLevel, err := logrus.ParseLevel(config.Get("logLevel"))
+	if err != nil {
+		logLevel = logrus.DebugLevel
+	}
+	logrus.SetLevel(logLevel)
 
 	logrus.SetFormatter(&jsonFormatter{})
 
@@ -150,26 +154,6 @@ func (entry *entry) Panic(msg interface{}) {
 
 func (e *entry) WithFields(fields Fields) *entry {
 	return &entry{e.Entry.WithFields(logrus.Fields(fields))}
-}
-
-// Convert the level string to a logrusrus Level. E.g. "panic" becomes "PanicLevel".
-func levelFromString(level string) logrus.Level {
-	switch level {
-	case "debug":
-		return logrus.DebugLevel
-	case "info":
-		return logrus.InfoLevel
-	case "warning":
-		return logrus.WarnLevel
-	case "error":
-		return logrus.ErrorLevel
-	case "fatal":
-		return logrus.FatalLevel
-	case "panic":
-		return logrus.PanicLevel
-	default:
-		return logrus.DebugLevel
-	}
 }
 
 // Unix timestamp in milliseconds resolution
