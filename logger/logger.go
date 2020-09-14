@@ -12,7 +12,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"log/syslog"
 	"os"
 	"time"
 
@@ -34,6 +33,17 @@ const (
 	messageKey     = "short_message"
 	specversionKey = "version"
 	timestampKey   = "timestamp"
+
+	// From /usr/include/sys/h.
+	// These are the same on Linux, BSD, and OS X.
+	LOG_EMERG Priority = iota
+	LOG_ALERT
+	LOG_CRIT
+	LOG_ERR
+	LOG_WARNING
+	LOG_NOTICE
+	LOG_INFO
+	LOG_DEBUG
 )
 
 type Fields logrus.Fields
@@ -112,42 +122,42 @@ func Panicf(format string, args ...interface{}) {
 
 func (entry *entry) Debug(msg interface{}) {
 	entry.Entry.
-		WithField(levelKey, syslog.LOG_DEBUG).
+		WithField(levelKey, LOG_DEBUG).
 		WithField(timestampKey, nowMillis()).
 		Debug(msg)
 }
 
 func (entry *entry) Info(msg interface{}) {
 	entry.Entry.
-		WithField(levelKey, syslog.LOG_INFO).
+		WithField(levelKey, LOG_INFO).
 		WithField(timestampKey, nowMillis()).
 		Info(msg)
 }
 
 func (entry *entry) Warn(msg interface{}) {
 	entry.Entry.
-		WithField(levelKey, syslog.LOG_WARNING).
+		WithField(levelKey, LOG_WARNING).
 		WithField(timestampKey, nowMillis()).
 		Warn(msg)
 }
 
 func (entry *entry) Error(msg interface{}) {
 	entry.Entry.
-		WithField(levelKey, syslog.LOG_ERR).
+		WithField(levelKey, LOG_ERR).
 		WithField(timestampKey, nowMillis()).
 		Error(msg)
 }
 
 func (entry *entry) Fatal(msg interface{}) {
 	entry.Entry.
-		WithField(levelKey, syslog.LOG_CRIT).
+		WithField(levelKey, LOG_CRIT).
 		WithField(timestampKey, nowMillis()).
 		Fatal(msg)
 }
 
 func (entry *entry) Panic(msg interface{}) {
 	entry.Entry.
-		WithField(levelKey, syslog.LOG_EMERG).
+		WithField(levelKey, LOG_EMERG).
 		WithField(timestampKey, nowMillis()).
 		Panic(msg)
 }
