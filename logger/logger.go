@@ -25,6 +25,8 @@ type entry struct {
 	*logrus.Entry
 }
 
+type Priority int
+
 const (
 	appversionKey  = "app_version"
 	environmentKey = "environment"
