@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: /go/src/github.com/olxbr/ligeiro
     docker:
-      - image: circleci/golang:1.9.2
+      - image: circleci/golang:1.16.0
     steps:
       - checkout
       - run:
