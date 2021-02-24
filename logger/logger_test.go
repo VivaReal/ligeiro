@@ -40,7 +40,7 @@ func TestLoggerLevel(t *testing.T) {
 	Debug("Lorem Ipsum")
 
 	json.Unmarshal(buffer.Bytes(), &fields)
-	if fields["level"] != float64(7) {
+	if fields["level"] != float64(14) {
 		t.Errorf("Wrong level from debug method: %s", fields["level"])
 	}
 
@@ -48,7 +48,7 @@ func TestLoggerLevel(t *testing.T) {
 	Info("Lorem Ipsum")
 
 	json.Unmarshal(buffer.Bytes(), &fields)
-	if fields["level"] != float64(6) {
+	if fields["level"] != float64(13) {
 		t.Errorf("Wrong level from info method: %s", fields["level"])
 	}
 
@@ -56,7 +56,7 @@ func TestLoggerLevel(t *testing.T) {
 	Warn("Lorem Ipsum")
 
 	json.Unmarshal(buffer.Bytes(), &fields)
-	if fields["level"] != float64(4) {
+	if fields["level"] != float64(11) {
 		t.Errorf("Wrong level from warn method: %s", fields["level"])
 	}
 
@@ -64,7 +64,7 @@ func TestLoggerLevel(t *testing.T) {
 	Error("Lorem Ipsum")
 
 	json.Unmarshal(buffer.Bytes(), &fields)
-	if fields["level"] != float64(3) {
+	if fields["level"] != float64(10) {
 		t.Errorf("Wrong level from error method: %s", fields["level"])
 	}
 }
