@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Download dependencies
-          command: go get github.com/sirupsen/logrus
+          command: go mod vendor
       - run:
           name: Run specs with coverage and race condition check
           command: go test -v -cover -race ./...
