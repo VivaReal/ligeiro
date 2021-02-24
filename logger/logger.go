@@ -15,7 +15,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/grupozap/ligeiro/envcfg"
+	"github.com/olxbr/ligeiro/envcfg"
 	"github.com/sirupsen/logrus"
 )
 

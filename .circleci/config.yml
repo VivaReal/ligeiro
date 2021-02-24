@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: /go/src/github.com/grupozap/ligeiro
+    working_directory: /go/src/github.com/olxbr/ligeiro
     docker:
       - image: circleci/golang:1.9.2
     steps:

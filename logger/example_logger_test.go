@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/grupozap/ligeiro/logger"
+	"github.com/olxbr/ligeiro/logger"
 	"github.com/sirupsen/logrus"
 )
 
